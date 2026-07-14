@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadence Outreach | Booked Meetings for Agencies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#1f4e79; --blue2:#2e74b5; --ink:#141b26; --muted:#5a6675;
+    --bg:#ffffff; --soft:#f5f8fc; --line:#e6ecf4; --accent:#12b886; --accent2:#0ea5a5;
+    --radius:16px; --shadow:0 18px 50px rgba(20,40,80,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);line-height:1.6;background:var(--bg);overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:100;
+    background:linear-gradient(90deg,var(--accent),var(--blue2));transition:width .1s linear}
+
+  header.nav{position:fixed;top:0;left:0;right:0;z-index:90;padding:14px 0;
+    backdrop-filter:blur(10px);background:rgba(255,255,255,.72);
+    border-bottom:1px solid transparent;transition:.3s}
+  header.nav.scrolled{background:rgba(255,255,255,.94);border-bottom:1px solid var(--line);box-shadow:0 6px 24px rgba(20,40,80,.06)}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between}
+  .brand{font-weight:800;font-size:19px;letter-spacing:-.3px;color:var(--blue);display:flex;align-items:center;gap:9px}
+  .brand .dot{width:11px;height:11px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--blue2));box-shadow:0 0 0 4px rgba(18,184,134,.15)}
+  .btn{display:inline-block;background:var(--blue);color:#fff;padding:13px 26px;border-radius:12px;
+    font-weight:700;font-size:15px;transition:transform .2s,box-shadow .2s,background .2s;cursor:pointer;border:none}
+  .btn:hover{background:var(--blue2);transform:translateY(-2px);box-shadow:0 12px 28px rgba(31,78,121,.28)}
+  .btn.accent{background:linear-gradient(135deg,var(--accent),var(--accent2))}
+  .btn.accent:hover{box-shadow:0 12px 30px rgba(18,184,134,.35)}
+  .btn.big{padding:17px 36px;font-size:17px}
+  .nav .btn{padding:10px 20px}
+
+  .hero{position:relative;padding:170px 0 100px;text-align:center;color:#fff;overflow:hidden;
+    background:linear-gradient(160deg,#12324f 0%,#1f4e79 55%,#2e74b5 100%)}
+  .hero::before,.hero::after{content:"";position:absolute;border-radius:50%;filter:blur(60px);opacity:.5;z-index:0}
+  .hero::before{width:480px;height:480px;background:#12b886;top:-160px;right:-120px;animation:float 9s ease-in-out infinite}
+  .hero::after{width:420px;height:420px;background:#2e74b5;bottom:-180px;left:-120px;animation:float 11s ease-in-out infinite reverse}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-26px)}}
+  .hero .wrap{position:relative;z-index:1}
+  .tag{display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);
+    padding:7px 18px;border-radius:100px;font-size:13px;letter-spacing:.6px;font-weight:600;margin-bottom:26px}
+  .hero h1{font-size:56px;line-height:1.08;font-weight:900;letter-spacing:-1.5px;margin-bottom:20px}
+  .hero h1 .grad{background:linear-gradient(120deg,#7ef7c9,#a5e0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p.sub{font-size:21px;opacity:.94;max-width:660px;margin:0 auto 34px;font-weight:400}
+  .hero .micro{font-size:14px;opacity:.8;margin-top:18px}
+  .scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:1;
+    width:26px;height:42px;border:2px solid rgba(255,255,255,.5);border-radius:14px}
+  .scroll-cue span{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:4px;height:8px;
+    background:#fff;border-radius:2px;animation:cue 1.6s infinite}
+  @keyframes cue{0%{opacity:0;top:8px}30%{opacity:1}60%{opacity:1}100%{opacity:0;top:22px}}
+
+  .stats{background:var(--soft);border-bottom:1px solid var(--line)}
+  .stats .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:44px 24px}
+  .stat{text-align:center}
+  .stat .num{font-size:42px;font-weight:900;color:var(--blue);letter-spacing:-1px;line-height:1}
+  .stat .lbl{color:var(--muted);font-size:15px;margin-top:8px;font-weight:500}
+
+  section{padding:88px 0}
+  .eyebrow{text-align:center;color:var(--accent2);font-weight:700;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+  h2{font-size:38px;font-weight:800;color:var(--ink);text-align:center;letter-spacing:-1px;margin-bottom:14px}
+  .lead{color:var(--muted);text-align:center;max-width:640px;margin:0 auto 52px;font-size:19px}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;transition:transform .3s,box-shadow .3s,border-color .3s}
+  .card:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:#cfe0f2}
+  .card h3{font-size:19px;margin-bottom:10px}
+  .card p{color:var(--muted);font-size:15.5px}
+  .num-badge{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:20px;color:#fff;margin-bottom:18px;background:linear-gradient(135deg,var(--blue),var(--blue2))}
+  .ic{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;background:var(--soft)}
+
+  .alt{background:var(--soft)}
+  .list{max-width:680px;margin:0 auto;display:grid;gap:14px}
+  .li{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 22px;transition:transform .25s,box-shadow .25s}
+  .li:hover{transform:translateX(6px);box-shadow:0 10px 26px rgba(20,40,80,.07)}
+  .li .ck{flex:0 0 26px;width:26px;height:26px;border-radius:50%;background:rgba(18,184,134,.13);color:var(--accent2);
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;margin-top:2px}
+  .li b{display:block;font-size:16px}
+  .li span{color:var(--muted);font-size:15px}
+
+  .price{max-width:480px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:22px;
+    padding:44px;text-align:center;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .price::before{content:"";position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(90deg,var(--accent),var(--blue2))}
+  .price .plan{font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--accent2)}
+  .price .amt{font-size:56px;font-weight:900;color:var(--blue);letter-spacing:-2px;margin:6px 0 2px}
+  .price .amt span{font-size:19px;color:var(--muted);font-weight:600}
+  .price ul{list-style:none;text-align:left;margin:26px 0}
+  .price li{padding:11px 0;border-bottom:1px solid var(--line);font-size:15.5px;display:flex;gap:10px;align-items:center}
+  .price li:last-child{border-bottom:none}
+  .price li:before{content:"✓";color:var(--accent2);font-weight:900;flex:0 0 auto}
+
+  .cta{background:linear-gradient(160deg,#12324f,#1f4e79);color:#fff;text-align:center;position:relative;overflow:hidden}
+  .cta::after{content:"";position:absolute;width:500px;height:500px;border-radius:50%;background:#12b886;filter:blur(80px);opacity:.28;bottom:-260px;right:-120px}
+  .cta .wrap{position:relative;z-index:1}
+  .cta h2{color:#fff}
+  .cta .lead{color:rgba(255,255,255,.85)}
+  .cta .micro{margin-top:16px;color:rgba(255,255,255,.75);font-size:14px}
+
+  footer{padding:34px 0;text-align:center;font-size:14px;background:#0c1622;color:#8fa0b5}
+
+  [data-reveal]{opacity:0;transform:translateY(34px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  [data-reveal].in{opacity:1;transform:none}
+  .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+
+  @media(max-width:760px){
+    .grid,.stats .wrap{grid-template-columns:1fr}
+    .hero{padding:140px 0 80px}
+    .hero h1{font-size:36px}
+    h2{font-size:28px}
+    .hero p.sub{font-size:18px}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>Cadence Outreach</div>
+    <a class="btn" href="#contact">Book a call</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="tag" data-reveal>CADENCE OUTREACH · MANAGED APPOINTMENT SETTING</div>
+    <h1 class="d1" data-reveal>Qualified meetings,<br><span class="grad">booked for your agency.</span></h1>
+    <p class="sub d2" data-reveal>We plug a trained SDR into your pipeline — sourcing, scripts, outreach, CRM and reporting fully handled. You show up to meetings. That's it.</p>
+    <div class="d3" data-reveal><a class="btn accent big" href="#contact">Book a 15-min call →</a></div>
+    <div class="micro d3" data-reveal>No hiring. No training. No management overhead.</div>
+  </div>
+  <div class="scroll-cue"><span></span></div>
+</div>
+
+<div class="stats">
+  <div class="wrap">
+    <div class="stat" data-reveal><div class="num"><span class="count" data-to="50">0</span>%</div><div class="lbl">cheaper than a US in-house SDR</div></div>
+    <div class="stat d1" data-reveal><div class="num"><span class="count" data-to="2">0</span> wks</div><div class="lbl">to your first booked meetings</div></div>
+    <div class="stat d2" data-reveal><div class="num"><span class="count" data-to="12">0</span></div><div class="lbl">qualified meetings / month target</div></div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow" data-reveal>The problem</div>
+    <h2 data-reveal>Hiring an SDR is slow and risky</h2>
+    <p class="lead" data-reveal>Recruiting, onboarding, and managing a rep eats weeks — and most in-house SDRs churn within a year.</p>
+    <div class="grid">
+      <div class="card" data-reveal><div class="ic">🐌</div><h3>Weeks to hire</h3><p>Posting, screening, and training a rep delays your pipeline for months.</p></div>
+      <div class="card d1" data-reveal><div class="ic">💸</div><h3>High cost</h3><p>A US in-house SDR runs $5,000–8,000/mo in salary, tools, and overhead.</p></div>
+      <div class="card d2" data-reveal><div class="ic">🧩</div><h3>You manage it</h3><p>Scripts, QA, CRM hygiene, coaching — all land on your plate.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow" data-reveal>How it works</div>
+    <h2 data-reveal>From kickoff to booked meetings in ~2 weeks</h2>
+    <p class="lead" data-reveal>A simple, done-for-you process. You stay focused on closing.</p>
+    <div class="grid">
+      <div class="card" data-reveal><div class="num-badge">1</div><h3>Kickoff</h3><p>We align on your ICP, offer, and target list. We build the scripts and sequences.</p></div>
+      <div class="card d1" data-reveal><div class="num-badge">2</div><h3>We run outreach</h3><p>A dedicated, trained setter works your list daily — email, LinkedIn, and calls.</p></div>
+      <div class="card d2" data-reveal><div class="num-badge">3</div><h3>You take meetings</h3><p>Qualified meetings land on your calendar. You get a weekly performance report.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow" data-reveal>What you get</div>
+    <h2 data-reveal>Everything, handled for you</h2>
+    <div class="list" style="margin-top:44px">
+      <div class="li" data-reveal><span class="ck">✓</span><div><b>A dedicated appointment setter</b><span>Vetted, trained, and working your account — not shared across ten clients.</span></div></div>
+      <div class="li d1" data-reveal><span class="ck">✓</span><div><b>Done-for-you scripts &amp; sequences</b><span>Messaging built for your offer and tested against your market.</span></div></div>
+      <div class="li d2" data-reveal><span class="ck">✓</span><div><b>CRM &amp; pipeline hygiene</b><span>Every lead tracked and updated — no messy handoffs.</span></div></div>
+      <div class="li d1" data-reveal><span class="ck">✓</span><div><b>Weekly reporting</b><span>Meetings booked, activity, and pipeline — full transparency.</span></div></div>
+      <div class="li d2" data-reveal><span class="ck">✓</span><div><b>One point of contact</b><span>You talk to us. We manage the setter, the process, and the quality.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow" data-reveal>Why Cadence</div>
+    <h2 data-reveal>Why we're different</h2>
+    <p class="lead" data-reveal>Most agencies plug in a script-reading bot. We send a real, hand-picked human who understands your business.</p>
+    <div class="grid">
+      <div class="card" data-reveal><div class="ic">🎯</div><h3>Vetted, not outsourced blindly</h3><p>Every setter passes live interviews, role-play objection drills, and a paid test before they touch your account.</p></div>
+      <div class="card d1" data-reveal><div class="ic">🗣️</div><h3>Human, not a script bot</h3><p>Decision-makers are numb to AI spam. Our setters hold a real conversation and handle pushback — because they're people.</p></div>
+      <div class="card d2" data-reveal><div class="ic">🏆</div><h3>Built for agencies</h3><p>We focus on marketing &amp; creative agencies, so your setter already speaks your buyers' language.</p></div>
+    </div>
+    <p class="lead" data-reveal style="margin-top:40px;margin-bottom:0;font-weight:700;color:var(--ink)">Meetings from a real human who gets your business — not a script bot.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow" data-reveal>Pricing</div>
+    <h2 data-reveal>Simple, flat pricing</h2>
+    <p class="lead" data-reveal>One monthly fee. No recruiting fees, no per-hire costs, cancel with 14 days' notice.</p>
+    <div class="price" data-reveal>
+      <div class="plan">Managed SDR</div>
+      <div class="amt">$3,000<span>/month</span></div>
+      <ul>
+        <li>Dedicated trained appointment setter</li>
+        <li>Custom scripts &amp; multi-channel outreach</li>
+        <li>Target of 8–12 qualified meetings / month</li>
+        <li>CRM management + weekly reports</li>
+        <li>Paid in advance · start within 5 business days</li>
+      </ul>
+      <a class="btn big" href="#contact" style="width:100%">Get started →</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="wrap">
+    <h2 data-reveal>Let's fill your calendar</h2>
+    <p class="lead" data-reveal>Book a quick call and we'll show you exactly how we'd generate meetings for your agency.</p>
+    <div class="d1" data-reveal><a class="btn accent big" href="mailto:cadence0u1reach@gmail.com?subject=Appointment%20Setting%20Inquiry">Book a 15-min call →</a></div>
+    <div class="micro d1" data-reveal>or email us at cadence0u1reach@gmail.com</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 Cadence Outreach · Managed Appointment Setting for B2B agencies</div>
+</footer>
+
+<script>
+  var progress = document.getElementById('progress');
+  var nav = document.getElementById('nav');
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+    progress.style.width = pct + '%';
+    if(window.scrollY > 20){ nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ e.target.classList.add('in'); }
+      else { e.target.classList.remove('in'); }
+    });
+  }, {threshold:0.12, rootMargin:"0px 0px -8% 0px"});
+  document.querySelectorAll('[data-reveal]').forEach(function(el){ io.observe(el); });
+
+  function animateCount(el){
+    var to = parseInt(el.getAttribute('data-to'), 10);
+    var dur = 1100, start = null;
+    function step(ts){
+      if(!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(eased * to);
+      if(p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var cio = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){ animateCount(e.target); cio.unobserve(e.target); }
+    });
+  }, {threshold:0.6});
+  document.querySelectorAll('.count').forEach(function(el){ cio.observe(el); });
+</script>
+</body>
+</html>
